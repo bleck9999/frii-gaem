@@ -11,7 +11,7 @@ enum directions {
 	UP
 };
 directions dir1, dir2;
-int x1, x2, noty1, y2;
+int x1, x2, noty1, y2; //fun story: y1 is used by stdlib and for some dumb reason things break if you dare to use y1 
 int ballX, ballY, ballVX, ballVY;
 
 int isOnPlayer(int i, int j){
