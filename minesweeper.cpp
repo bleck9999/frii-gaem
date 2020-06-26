@@ -20,8 +20,6 @@ unsigned int numMines;
 class MSGrid {
 private:
 	std::vector<std::vector<char>> m_grid;
-	int m_height;
-	int m_width;
 	std::map<char, char> cIndicators {
 		{'t','1'},
 		{'y','2'},
@@ -58,7 +56,6 @@ private:
 		};
 public:
 	void init(int i_height, int i_width){
-		m_height = i_height; m_width = i_width;
 		m_grid.reserve(i_height);
 		for (int i {0}; i < i_height; ++i)
 			m_grid.push_back(std::vector<char>(i_width,'?'));
