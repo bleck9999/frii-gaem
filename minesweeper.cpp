@@ -203,10 +203,12 @@ void draw(){
 			else {
 				switch(mapp.getValue(i,j)){
 				case '*': //mine
-					/*attron(COLOR_PAIR(11)); //DEBUG
-					mvaddch(i,j,'*'); //DEBUG
-					attroff(COLOR_PAIR(11)); //DEBUG
-					break; //DEBUG */
+					if (gameOver){
+					    attron(COLOR_PAIR(11)); 
+					    mvaddch(i,j,'*'); 
+					    attroff(COLOR_PAIR(11)); 
+					    break; 
+					}
 				case 't': //covered indicators (1-8)
 				case 'y':
 				case 'u':
@@ -233,7 +235,7 @@ void draw(){
 					mvaddch(i,j,'F');
 					attroff(COLOR_PAIR(5));
 					break;
-				case '1':
+				case '1': //uncovered indicators
 					attron(COLOR_PAIR(3));
 					mvaddch(i,j,'1');
 					attroff(COLOR_PAIR(3));
@@ -288,6 +290,8 @@ void draw(){
 }
 
 void input(){
+    if (gameOver)
+        return;
 	switch(getch()){
 	case 'w':
 	case KEY_UP:
@@ -357,7 +361,16 @@ int main(){
 	//	logic();
 	//	usleep(2500);
 	}
-	getch();
+	timeout(-1);
+	draw();
+	bool stop = false;
+	while (!stop) {
+	    mvprintw(height/2,(width/2)-10,"Press ENTER to exit");
+	    int ch {getch()};
+	    if (ch == 10 || ch == 343)
+	        stop = true;
+    }
+    
 	endwin();
 
 	/*
